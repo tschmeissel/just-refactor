@@ -37,7 +37,7 @@ export class Paint {
 		this.rowNum = 0;
 		this.report = "<table>";
 		while (!this.reportDone) {
-			this.getReportRow();
+			this.report += this.getReportRow();
 		}
 		this.report += "</tbody></table>";
 		return this.report;
@@ -55,7 +55,9 @@ export class Paint {
 				output = `<tr><td>${color}</td><td>${remaining}</td></tr>`
 			} else {
 				this.reportDone = true;
+				output = "";
 			}
 		}
+		return output;
 	}
 }
