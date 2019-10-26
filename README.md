@@ -25,3 +25,9 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## bookmark
+
+The unit test is running now.
+Go on with refactoring according to video 22:13
+https://www.youtube.com/watch?v=J18mLs-SRpI
