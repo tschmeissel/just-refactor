@@ -1,16 +1,8 @@
 const MAX_USES = 8;
 
-/**
- * https://www.youtube.com/watch?v=J18mLs-SRpI
- */
-export class Paint {
-	data: Array<any> = [];
-	reportDone: boolean = false;
-	inHeader: boolean = false;
-	rowNum: number;
-	report: string;
-	
+export class PaintStore {
 	constructor() {
+		// developer concern
 		// set up persistence localStorage
 		let encoded = localStorage.getItem("paint");
 		if (!encoded) {
@@ -20,23 +12,40 @@ export class Paint {
 		this.data = JSON.parse(encoded);
 	};
 	
-	getPaintLeft(color, uses?) {
-		// initializing new color
-		if (!this.data[color]) {
-			this.data[color] = MAX_USES;
-			localStorage.setItem("paint", JSON.stringify(this.data));
-		}
-		
-		// taking away color
-		if (uses) {
-			this.data[color] = Math.max(this.data[color] - uses, 0);
-			localStorage.setItem("paint", JSON.stringify(this.data));
-		}
-		
-		// returning the units left
-		return this.data[color];
+	get(color) {
+		return this.data[color] || MAX_USES;
 	}
 	
+	set(color, value) {
+		this.data[color] = value;
+		localStorage.setItem("paint", JSON.stringify(this.data));
+	}
+}
+
+export class Paint {
+	data: Array<any> = [];
+	reportDone: boolean = false;
+	inHeader: boolean = false;
+	rowNum: number;
+	report: string;
+	paintStore: PaintStore;
+	
+	constructor(store) {
+		this.store = store;
+	}
+	
+	usePaint(color, uses?) {
+		// avoids going below 0
+		let currentValue = this.store.get(color);
+		let newValue = Math.max(this.data[color] - uses, 0);
+		this.store.set(color, newValue);
+	}
+	
+	getPaintLeft(color) {
+		return this.store.get(color);
+	}
+	
+	// business users
 	generateReport() {
 		// ???
 		this.reportDone = false;

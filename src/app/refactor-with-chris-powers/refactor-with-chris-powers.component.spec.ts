@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RefactorWithChrisPowersComponent } from './refactor-with-chris-powers.component';
-import { Paint } from './Paint';
+import { Paint, PaintStore } from './Paint';
 
 
 describe('RefactorWithChrisPowersComponent', () => {
@@ -36,10 +36,10 @@ describe('RefactorWithChrisPowersComponent', () => {
   });
   
   it('returns an HTML table', () => {
- 	let paint: Paint = new Paint();
-	paint.getPaintLeft("blue", 1);
-	paint.getPaintLeft("red", 2);
-	paint.getPaintLeft("green", 3);
+ 	let paint: Paint = new Paint(new PaintStore());
+	paint.usePaint("blue", 1);
+	paint.usePaint("red", 2);
+	paint.usePaint("green", 3);
 	const expected: string = 
 		'<table><thead>' +
 		'<tr><th>Color</th><th>Remaining</th></tr></thead><tbody>' +
