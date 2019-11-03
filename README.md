@@ -31,3 +31,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 The unit test is running now.
 Go on with refactoring according to video 50:12
 https://www.youtube.com/watch?v=J18mLs-SRpI
+55:02 comment driven refactoring
