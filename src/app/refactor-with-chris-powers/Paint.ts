@@ -1,6 +1,12 @@
 const MAX_USES = 8;
 
-export class PaintStore {
+export class Paint {
+	data: Array<any> = [];
+	reportDone: boolean = false;
+	inHeader: boolean = false;
+	rowNum: number;
+	report: string;
+	
 	constructor() {
 		// developer concern
 		// set up persistence localStorage
@@ -10,43 +16,20 @@ export class PaintStore {
 			localStorage.setItem("paint", encoded);
 		}
 		this.data = JSON.parse(encoded);
-	};
-	
-	get(color) {
-		return this.data[color] || MAX_USES;
-	}
-	
-	set(color, value) {
-		this.data[color] = value;
-		localStorage.setItem("paint", JSON.stringify(this.data));
-	}
-}
-
-export class ReportGenerator {
-}
-
-export class Paint {
-	data: Array<any> = [];
-	reportDone: boolean = false;
-	inHeader: boolean = false;
-	rowNum: number;
-	report: string;
-	paintStore: store;
-	resportGenerator: ReportGenerator;
-	
-	constructor(store, report) {
-		this.store = store;
 	}
 	
 	usePaint(color, uses?) {
-		// avoids going below 0
-		let currentValue = this.store.get(color);
-		let newValue = Math.max(this.data[color] - uses, 0);
-		this.store.set(color, newValue);
+		// initializing new color
+		if (!this.data[color]) {
+			this.data[color] = MAX_USES;
+			localStorage.setItem("paint", JSON.stringify(this.data));
+		}
+		this.data[color] = Math.max(this.data[color] - uses, 0);
+		localStorage.setItem("paint", JSON.stringify(this.data));
 	}
 	
 	getPaintLeft(color) {
-		return this.store.get(color);
+		return this.data[color];
 	}
 	
 	// business users
