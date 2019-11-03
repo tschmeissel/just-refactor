@@ -26,8 +26,13 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-## bookmark
+## Bookmarks
 
-The unit test is running now.
-Go on with refactoring according to video 33:13
 https://www.youtube.com/watch?v=J18mLs-SRpI
+
+25:20 add refactoring comments
+31:30 refactor getPaintLeft
+
+## Notes
+ When I add a refactoring comment it means this code is not expressing the intent it is doing
+ it is not immediately clear
