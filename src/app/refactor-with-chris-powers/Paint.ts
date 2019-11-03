@@ -22,15 +22,19 @@ export class PaintStore {
 	}
 }
 
+export class ReportGenerator {
+}
+
 export class Paint {
 	data: Array<any> = [];
 	reportDone: boolean = false;
 	inHeader: boolean = false;
 	rowNum: number;
 	report: string;
-	paintStore: PaintStore;
+	paintStore: store;
+	resportGenerator: ReportGenerator;
 	
-	constructor(store) {
+	constructor(store, report) {
 		this.store = store;
 	}
 	
