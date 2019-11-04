@@ -37,9 +37,9 @@ describe('RefactorWithChrisPowersComponent', () => {
   
   it('returns an HTML table', () => {
  	let paint: Paint = new Paint();
-	paint.getPaintLeft("blue", 1);
-	paint.getPaintLeft("red", 2);
-	paint.getPaintLeft("green", 3);
+	paint.usePaint("blue", 1);
+	paint.usePaint("red", 2);
+	paint.usePaint("green", 3);
 	const expected: string = 
 		'<table><thead>' +
 		'<tr><th>Color</th><th>Remaining</th></tr></thead><tbody>' +

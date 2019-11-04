@@ -20,20 +20,19 @@ export class Paint {
 		this.data = JSON.parse(encoded);
 	};
 	
-	getPaintLeft(color, uses?) {
+	usePaint(color, uses) {
 		// initializing new color
 		if (!this.data[color]) {
 			this.data[color] = MAX_USES;
 			localStorage.setItem("paint", JSON.stringify(this.data));
 		}
 		
-		// taking away color
-		if (uses) {
-			this.data[color] = Math.max(this.data[color] - uses, 0);
-			localStorage.setItem("paint", JSON.stringify(this.data));
-		}
-		
-		// returning the units left
+		this.data[color] = Math.max(this.data[color] - uses, 0);
+		localStorage.setItem("paint", JSON.stringify(this.data));
+	}
+	
+	// returning the units left
+	getPaintLeft(color) {
 		return this.data[color];
 	}
 	
