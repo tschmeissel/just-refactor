@@ -1,8 +1,5 @@
 const MAX_USES = 8;
 
-/**
- * https://www.youtube.com/watch?v=J18mLs-SRpI
- */
 export class Paint {
 	data: Array<any> = [];
 	reportDone: boolean = false;
@@ -11,6 +8,7 @@ export class Paint {
 	report: string;
 	
 	constructor() {
+		// developer concern
 		// set up persistence localStorage
 		let encoded = localStorage.getItem("paint");
 		if (!encoded) {
@@ -18,7 +16,7 @@ export class Paint {
 			localStorage.setItem("paint", encoded);
 		}
 		this.data = JSON.parse(encoded);
-	};
+	}
 	
 	usePaint(color, uses) {
 		// initializing new color
@@ -26,7 +24,6 @@ export class Paint {
 			this.data[color] = MAX_USES;
 			localStorage.setItem("paint", JSON.stringify(this.data));
 		}
-		
 		this.data[color] = Math.max(this.data[color] - uses, 0);
 		localStorage.setItem("paint", JSON.stringify(this.data));
 	}
@@ -36,6 +33,7 @@ export class Paint {
 		return this.data[color];
 	}
 	
+	// business users
 	generateReport() {
 		// ???
 		this.reportDone = false;
