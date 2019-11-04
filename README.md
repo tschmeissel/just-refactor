@@ -32,6 +32,7 @@ https://www.youtube.com/watch?v=J18mLs-SRpI
 
 25:20 add refactoring comments
 31:30 refactor getPaintLeft
+37:20 refactor getReportRow
 
 ## Notes
  When I add a refactoring comment it means this code is not expressing the intent it is doing
