@@ -49,6 +49,8 @@ export class Paint {
 		return this.report;
 	}
 	
+	// get implies thats a query while the state of Paint is
+	// changed at several places
 	getReportRow() {
 		let output;
 		// generate header
