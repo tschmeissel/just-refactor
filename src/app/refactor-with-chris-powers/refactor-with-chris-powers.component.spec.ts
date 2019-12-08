@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RefactorWithChrisPowersComponent } from './refactor-with-chris-powers.component';
-import { Paint } from './Paint';
+import { Paint, PaintStore } from './Paint';
 
 
 describe('RefactorWithChrisPowersComponent', () => {
@@ -36,7 +36,7 @@ describe('RefactorWithChrisPowersComponent', () => {
   });
   
   it('returns an HTML table', () => {
- 	let paint: Paint = new Paint();
+ 	let paint: Paint = new Paint(new PaintStore());
 	paint.usePaint("blue", 1);
 	paint.usePaint("red", 2);
 	paint.usePaint("green", 3);

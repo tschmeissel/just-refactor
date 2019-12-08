@@ -1,11 +1,7 @@
 const MAX_USES = 8;
 
-export class Paint {
+export class PaintStore {
 	data: Array<any> = [];
-	reportDone: boolean = false;
-	inHeader: boolean = false;
-	rowNum: number;
-	report: string;
 	
 	constructor() {
 		// developer concern
@@ -18,19 +14,36 @@ export class Paint {
 		this.data = JSON.parse(encoded);
 	}
 	
-	usePaint(color, uses) {
-		// initializing new color
-		if (!this.data[color]) {
-			this.data[color] = MAX_USES;
-			localStorage.setItem("paint", JSON.stringify(this.data));
-		}
-		this.data[color] = Math.max(this.data[color] - uses, 0);
+	get(color) {
+		return this.data[color] || MAX_USES;
+	}
+	
+	set(color, value) {
+		this.data[color] = value;
 		localStorage.setItem("paint", JSON.stringify(this.data));
+	}
+}
+
+export class Paint {
+	reportDone: boolean = false;
+	inHeader: boolean = false;
+	rowNum: number;
+	report: string;
+	store: PaintStore;
+	
+	constructor(store) {
+		this.store = store;
+	}
+	
+	usePaint(color, uses) {
+		let currentValue = this.store.get(color);
+		let newValue = Math.max(currentValue - uses, 0);
+		this.store.set(color, newValue);
 	}
 	
 	// returning the units left
 	getPaintLeft(color) {
-		return this.data[color];
+		return this.store.get(color);
 	}
 	
 	// business users
@@ -59,7 +72,7 @@ export class Paint {
 			this.inHeader = false;
 		} else {
 			// create a row
-			const color = Object.keys(this.data)[this.rowNum++];
+			const color = Object.keys(this.store.data)[this.rowNum++];
 			if (color) {
 				const remaining = this.getPaintLeft(color);
 				output = `<tr><td>${color}</td><td>${remaining}</td></tr>`
